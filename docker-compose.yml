@@ -1,0 +1,45 @@
+services:
+  couchdb:
+    image: couchdb:3.4
+    environment:
+      COUCHDB_USER: ${COUCHDB_USER:-admin}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD:-cambiar_esta_clave}
+    ports:
+      - "127.0.0.1:5985:5984"
+    volumes:
+      - couchdata:/opt/couchdb/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:5984/_up"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+  api:
+    build: ./backend
+    environment:
+      COUCHDB_URL: http://couchdb:5984
+      COUCHDB_USER: ${COUCHDB_USER:-admin}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD:-cambiar_esta_clave}
+      ADMIN_KEY: ${ADMIN_KEY:-cambiar_clave_administracion}
+      PORT: "8080"
+    depends_on:
+      couchdb:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8080:8080"
+  web:
+    build: ./frontend
+    depends_on:
+      - api
+    ports:
+      - "127.0.0.1:3000:80"
+  k6:
+    image: grafana/k6:0.54.0
+    profiles: ["pruebas"]
+    volumes:
+      - ./tests:/scripts:ro
+    environment:
+      API_URL: http://api:8080
+    entrypoint: ["k6", "run", "/scripts/carga.js"]
+    depends_on: [api]
+volumes:
+  couchdata:
