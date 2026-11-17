@@ -3,7 +3,7 @@
 Incluye interfaz web adaptable/PWA, catálogo, solicitudes de reserva offline-first con IndexedDB, administración de experiencias, API REST en Rust y persistencia JSON en Apache CouchDB.
 
 ## Integrantes
-HERRERA DÍAZ, JAVIER ANTONIO			HD25004.                                 ROSALES MORAN, JOSE LUIS				 RM22065.                                GUILLEN HENRIQUEZ, CRISTIAN OSWALDO	 GH24026.                                   RIVAS MONROY, EDEN VLADIMIR			    RM24016.                                VASQUEZ CORVERA, WALTER IVAN			VC25012.
+HERRERA DÍAZ, JAVIER ANTONIO			HD25004.\n                               ROSALES MORAN, JOSE LUIS				 RM22065.\n                               GUILLEN HENRIQUEZ, CRISTIAN OSWALDO	  GH24026.\n                                   RIVAS MONROY, EDEN VLADIMIR			   RM24016.\n                                VASQUEZ CORVERA, WALTER IVAN			 VC25012.\n
 
 ## Requisitos
 Docker Desktop con Docker Compose v2. Para el frontend sin Docker: Node.js 20+; para la API sin Docker: Rust (cargo).
